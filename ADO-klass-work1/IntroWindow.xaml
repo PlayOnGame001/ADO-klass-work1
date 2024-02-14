@@ -1,0 +1,65 @@
+﻿<Window x:Class="ADO_klass_work1.IntroWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ADO_klass_work1"
+        mc:Ignorable="d"
+        Title="IntroWindow" Height="450" Width="900">
+    <StackPanel Orientation="Vertical">
+        <Label Content="Вступ. Підключення БД" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="MS SQL Server"/>
+            <Button x:Name="ConnectMsButton" Content="Connect" Click="ConnectMsButton_Click"/>
+            <Label x:Name="MsConnectionStatusLabel" Content="Disconnected"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="MY SQL Server"/>
+            <Button x:Name="ConnectMyButton" Content="Connect" Click="ConnectMyButton_Click"/>
+            <Label x:Name="MyConnectionStatusLabel" Content="Disconnected"/>
+        </StackPanel>
+        <Label Content="Исполнение запросов" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="MS SQL Server"/>
+            <Button x:Name="CreateMsButton" Content="Create table " Click="CreateMsButton_Click"/>
+            <Label x:Name="MsCreateStatusLabel" Content="Disconnected"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="MY SQL Server"/>
+            <Button x:Name="CreateMyButton" Content="Create table" Click="CreateMyButton_Click"/>
+            <Label x:Name="MyCreateStatusLabel" Content="Disconnected"/>
+        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
+                <Label Content="Name"/>
+                <TextBox x:Name="UserNameTextBox" Margin="10 0" Width="70" />
+                <Label Content="Login"/>
+                <TextBox x:Name="UserLoginTextBox" Margin="10 0" Width="70" />
+                <Label Content="Password"/>
+                <PasswordBox x:Name="UserPasswordTextBox" Margin="10 0" Width="70"/>
+                <Label Content="MY SQL Server"/>
+                <Button x:Name="InsertMyButton" Content="Add user (My)" Margin="10 0" Click="InsertMyButton_Click"/>
+                <Label Content="BirthDate"/>
+                <DatePicker Name="BirthDatePicker" Width="100" FirstDayOfWeek="Monday" DisplayDate="2024-11-02" KeyDown="BirthDatePicker_KeyDown"/>
+                <Label x:Name="InsertStatusLabel" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                <Button x:Name="SelectMsButton" Content="Показать (Ms)" Margin="20 0" Click="SelectMsButton_Click"/>
+                <TextBlock x:Name="SelectMsTextBlock"/>
+                
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <Button x:Name="SelectMyButton" Content="Показать (My)" Margin="20 0" Click="SelectMyButton_Click"/>
+                <TextBlock x:Name="SelectMyTextBlock"/>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</Window>

@@ -49,7 +49,7 @@ namespace ADO_klass_work1
         }
 
 
-        private void RegButton_Click(object sender, RoutedEventArgs e)
+       /* private void RegButton_Click(object sender, RoutedEventArgs e)
         {
             var errorMessage = GetInputError();
             if (errorMessage != null)
@@ -76,11 +76,51 @@ namespace ADO_klass_work1
             {
                 MessageBox.Show(ex.Message);
             }
-        }
+        }*/
 
         private void Login_Button(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void RegButton_Click(object sender, RoutedEventArgs e)
+        {
+              var errorMessage = GetInputError();
+            if (errorMessage != null)
+            {
+                MessageBox.Show(errorMessage,
+                    "Виконання зупинене",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+            using var cmd = new MySqlCommand(
+                $"INSERT INTO Users VALUES( UUID(), @name, @login, @birthdate, '{App.md5(RegPassword.Password)}' )",
+                App.MySqlConnection);
+            cmd.Parameters.Add(new MySqlParameter("@name", MySqlDbType.VarChar, 64)
+            {
+                Value = RegName.Text
+            });
+            cmd.Parameters.Add(new MySqlParameter("@login", MySqlDbType.VarChar, 64)
+            {
+                Value = RegLogin.Text
+            });
+            cmd.Parameters.Add(new MySqlParameter("@birthdate", MySqlDbType.VarChar, 64)
+            {
+                Value = BirthDatePicker.SelectedDate.Value.ToShortDateString()
+            });
+            //using var cmd = new MySqlCommand(
+            //    $"INSERT INTO Users VALUES( UUID(), '{RegName.Text}',
+            try
+            {
+                cmd.Prepare();  // підготовка запиту - компіляція без параметрів
+                cmd.ExecuteNonQuery();  // виконання - передача даних у скомпільований запит
+                MessageBox.Show("Insert OK");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

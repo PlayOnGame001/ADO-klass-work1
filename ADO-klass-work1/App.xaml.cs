@@ -20,6 +20,25 @@ namespace ADO_klass_work1
 
         }
         public static SqlConnection? _msConnection;
+        public static SqlConnection MsSqlConnection
+        {
+            get
+            {
+                if (_msConnection == null)
+                {
+                    _msConnection = new(
+                    JsonSerializer.Deserialize<JsonElement>(
+                    System.IO.File.ReadAllText("appsettings.json")
+                    )
+                        .GetProperty("ConnectionStrings")
+                        .GetProperty("LocalMS")
+                        .GetString()!
+                    );
+                    _msConnection.Open();
+                }
+                return _msConnection;
+            }
+        }
         public static MySqlConnection? mySqlConnection;
         public static MySqlConnection MySqlConnection
         {
@@ -45,25 +64,6 @@ namespace ADO_klass_work1
                     }
                 }
                 return mySqlConnection;
-            }
-        }
-        public static SqlConnection MsSqlConnection
-        {
-            get
-            {
-                if (_msConnection == null)
-                {
-                    _msConnection = new(
-                    JsonSerializer.Deserialize<JsonElement>(
-                    System.IO.File.ReadAllText("appsettings.json")
-                    )
-                        .GetProperty("ConnectionStrings")
-                        .GetProperty("LocalMS")
-                        .GetString()!
-                    );
-                    _msConnection.Open();
-                }
-                return _msConnection;
             }
         }
 

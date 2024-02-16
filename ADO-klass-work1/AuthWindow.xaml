@@ -35,7 +35,7 @@
             <PasswordBox Grid.Row="3" Grid.Column="1" x:Name="RegPassword"/>
             <Label Grid.Row="4" Content="Повтор"/>
             <PasswordBox Grid.Row="4" Grid.Column="1" x:Name="RegRepeat"/>
-            <Button x:Name="RegButton" Content="Регистрация"  Grid.Row="6" Grid.Column="1" HorizontalAlignment="Right" Margin="25 2" Padding="20 0" Click="RegButton_Click"/>
+            <Button x:Name="RegButton" Content="Регистрация"  Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="185,2,0,0" Padding="20 0" Click="RegButton_Click" Height="31" VerticalAlignment="Top"/>
             <Label Content="Дата&#10;народження" FontSize="8" Grid.Row="5" FontWeight="Medium"/>
             <DatePicker Grid.Row="5" Grid.Column="1" x:Name="BirthDatePicker"/>
         </Grid>

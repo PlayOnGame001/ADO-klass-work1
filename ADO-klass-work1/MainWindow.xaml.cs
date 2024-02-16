@@ -34,5 +34,12 @@ namespace ADO_klass_work1
             new AuthWindow().ShowDialog();
             this.Show();
         }
+
+        private void CrudButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new CrudWindow().ShowDialog();
+            this.Show();
+        }
     }
 }

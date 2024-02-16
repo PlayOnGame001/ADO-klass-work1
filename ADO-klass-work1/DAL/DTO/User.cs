@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ADO_klass_work1.DAL.DTO
 {
-    internal class User
+    public class User
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = null!;

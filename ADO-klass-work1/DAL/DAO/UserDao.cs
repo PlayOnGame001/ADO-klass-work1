@@ -12,6 +12,50 @@ namespace ADO_klass_work1.DAL.DAO
 {
     internal class UserDao
     {
+        public static bool UpdateUser(User user)
+        {
+            ArgumentNullException.ThrowIfNull(user);
+            if(user.Id == default) //можно улучшить и проверять наличие в БД.
+            {
+                throw new ArgumentException("Id field value must not be default", "user.Id");
+            }
+            using var cmd = new SqlCommand(
+            $"UPDATE Users SET  Name=@name, Login=@login, BirthDate=@birthDate, PasswordHash=@passHash" +
+            $"WHERE Id=@id",
+            App.MsSqlConnection);
+            cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.UniqueIdentifier)
+            {
+                Value = user.Id
+            });
+            cmd.Parameters.Add(new SqlParameter("@name", System.Data.SqlDbType.VarChar, 64)
+            {
+                Value = user.Name
+            });
+            cmd.Parameters.Add(new SqlParameter("@login", System.Data.SqlDbType.VarChar, 64)
+            {
+                Value = user.Login
+            });
+            cmd.Parameters.Add(new SqlParameter("@birthdate", System.Data.SqlDbType.DateTime, 64)
+            {
+                Value = user.BirthDate
+            });
+            cmd.Parameters.Add(new SqlParameter("@passHash", System.Data.SqlDbType.Char, 32)
+            {
+                Value = user.PasswordHash
+            });
+            try
+            {
+                cmd.Prepare();
+                cmd.ExecuteNonQuery(); 
+                return true;
+            }
+            catch (Exception ex)
+            {
+                App.LogError(ex.Message);
+                return false;
+            }
+            return true;
+        }
         public static List<User> GetAll()
         {
             using SqlCommand cmd = new("SELECT * FROM Users", App.MsSqlConnection);

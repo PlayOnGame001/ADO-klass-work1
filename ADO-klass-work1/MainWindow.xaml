@@ -11,5 +11,6 @@
         <Button x:Name="IntoButton" Content="Вcтуп" FontSize="18" FontWeight="DemiBold" Margin="20 10 20 10" Padding="5" Click="Button_Click_1"/>
         <Button x:Name="AuthButton"  Content="Аутентификация/Регистрация" FontSize="18" FontWeight="DemiBold" Margin="20 10 20 10" Padding="5" Click="AuthButton_Click"/>
         <Button x:Name="CrudButton"  Content="CRUD" FontSize="18" FontWeight="DemiBold" Margin="20 10 20 10" Padding="5" Click="CrudButton_Click"/>
+        <Button x:Name="EfButton"  Content="EfWindow" FontSize="18" FontWeight="DemiBold" Margin="20 10 20 10" Padding="5" Click="EfButton_Click"/>
     </StackPanel>
 </Window>

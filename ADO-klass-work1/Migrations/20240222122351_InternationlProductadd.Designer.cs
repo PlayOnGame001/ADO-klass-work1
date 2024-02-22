@@ -3,6 +3,7 @@ using System;
 using ADO_klass_work1.EfContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADO_klass_work1.Migrations
 {
     [DbContext(typeof(EfContext.EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20240222122351_InternationlProductadd")]
+    partial class InternationlProductadd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

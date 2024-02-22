@@ -8,13 +8,22 @@
         Loaded="Window_Loaded"
         Title="EfWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Horizontal">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="97*"/>
+            <ColumnDefinition Width="103*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
             <Label Content="Manager"/>
             <Label Content="--" x:Name="ManagersCountLabel"/>
             <Label Content="Product"/>
             <Label Content="--" x:Name="ProductCountLabel"/>
             <Label Content="Sale"/>
             <Label Content="--" x:Name="SaleCountLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,217,0,0">
+            <Button Content="SELECT" x:Name="SelectButton" Click="SelectButton_Click"/>
+            <Button x:Name="CheapButton" Content="Cheap" Click="CheapButton_Click" Margin="5"/>
+            <Label x:Name="Resultlabel"/>
         </StackPanel>
     </Grid>
 </Window>

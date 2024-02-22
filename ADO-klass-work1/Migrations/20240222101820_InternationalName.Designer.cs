@@ -3,6 +3,7 @@ using System;
 using ADO_klass_work1.EfContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADO_klass_work1.Migrations
 {
     [DbContext(typeof(EfContext.EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20240222101820_InternationalName")]
+    partial class InternationalName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -662,9 +665,6 @@ namespace ADO_klass_work1.Migrations
 
                     b.Property<DateTime?>("DeleteDt")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("InternationlProduct")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()

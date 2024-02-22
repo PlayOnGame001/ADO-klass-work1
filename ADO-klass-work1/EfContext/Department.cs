@@ -11,5 +11,6 @@ namespace ADO_klass_work1.EfContext
         public Guid Id { get; set; }
         public String Name { get; set; }
         public DateTime? DeleteDt { get; set; }
+        public String? InternationlName {  get; set; }
     }
 }

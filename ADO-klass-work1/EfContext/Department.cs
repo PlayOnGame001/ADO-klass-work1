@@ -12,5 +12,7 @@ namespace ADO_klass_work1.EfContext
         public String Name { get; set; }
         public DateTime? DeleteDt { get; set; }
         public String? InternationlName {  get; set; }
+        public List<Manager> MainWorkers { get; set; }
+        public IEnumerable<Manager> SecondaryWorkers { get; set; }
     }
 }

@@ -16,5 +16,7 @@ namespace ADO_klass_work1.EfContext
         public Guid? IdSecDep { get; set; }
         public Guid? IdChief { get; set; }
         public DateTime? DeleteDt { get; set; }
+        public Department MainDepartment { get; set; } 
+        public Department? SecondaryDepartment { get; set; } 
     }
 }

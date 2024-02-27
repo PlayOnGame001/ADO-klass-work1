@@ -15,6 +15,7 @@ namespace ADO_klass_work1
     public partial class App : Application
     {
         public static EfContext.EfContext EfDataContext { get; } = new();
+        public static Random Random { get; } = new();
         public static void LogError(String message, [CallerMemberName] string callerName="undefined")
         {
             System.IO.File.AppendAllText("logs.txt", $"{DateTime.Now} [{callerName}] {message}\n");

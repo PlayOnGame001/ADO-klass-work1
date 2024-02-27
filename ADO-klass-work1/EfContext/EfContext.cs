@@ -24,6 +24,17 @@ namespace ADO_klass_work1.EfContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Manager>()
+                .HasOne(m => m.MainDepartment)
+                .WithMany(d => d.MainWorkers)
+                .HasForeignKey(m => m.IdMainDep)
+                .HasPrincipalKey(d => d.Id);
+
+            modelBuilder.Entity<Manager>()
+              .HasOne(m => m.SecondaryDepartment)
+              .WithMany(d => d.SecondaryWorkers)
+              .HasForeignKey(m => m.IdSecDep);
+
             SeedDepartments(modelBuilder);
             SeedProducts(modelBuilder);
             SeedManagers(modelBuilder);

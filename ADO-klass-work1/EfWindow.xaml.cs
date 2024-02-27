@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace ADO_klass_work1
 {
@@ -30,7 +32,11 @@ namespace ADO_klass_work1
             ProductCountLabel.Content = App.EfDataContext.Products.Count();
             SaleCountLabel.Content = App.EfDataContext.Sales.Count();
         }
-
+        private void DisplayStatistics()
+        {
+            ManagersCountLabel.Content = App.EfDataContext.Managers.Count();
+            SaleCountLabel.Content = App.EfDataContext.Sales.Count();
+        }
         private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
             foreach(var dep in App.EfDataContext.Departments)
@@ -68,8 +74,87 @@ namespace ADO_klass_work1
                 .OrderBy(p => p.Price)
                 .Select(p => p.Name + "" + "\n" + p.Price * 84.22111)
                 .First();
+        }
 
-           
+        private async void SalestButton_Click(object sender, RoutedEventArgs e)
+        {
+            /*AddSales().ContinueWith((_) => DisplayStatistics());*/
+            SaleCountLabel.Content = "Updating...";
+            Task.Run(AddSales);
+        }
+        private async Task AddSales()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                App.EfDataContext.Sales.Add(new EfContext.Sale()
+                {
+                    Id = Guid.NewGuid(),
+                    ManagerId = App.EfDataContext.Managers.OrderBy(r => Guid.NewGuid()).First().Id,
+                    ProductId = App.EfDataContext.Products.OrderBy(r => Guid.NewGuid()).First().Id,
+                    Quantity = App.Random.Next(1, 10),
+                    SaleDt = new DateTime(2023, 1, 1)
+                    .AddDays(App.Random.Next(365))
+                    .AddHours(App.Random.Next(9, 20))
+                    .AddMinutes(App.Random.Next(0, 59))
+                    .AddSeconds(App.Random.Next(0, 59))
+                });
+            }
+           await App.EfDataContext.SaveChangesAsync();
+           this.Dispatcher.Invoke(DisplayStatistics); // run
+        }
+
+        private void ProductSalesButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime date = new(2023, 02, 23);
+            var query = App.EfDataContext.Products 
+            .GroupJoin(
+                App.EfDataContext.Sales,
+                p => p.Id,
+                s => s.ProductId,
+                (product, sales) => new {Name = product.Name, 
+                    Pcs = sales.Where(s => s.SaleDt.Date == date).Sum(s => s.Quantity)
+                }
+                );
+            foreach (var item in query)
+            {
+                Resultlabel.Content += $"{item.Name} {item.Pcs} \n";
+            }
+        }
+
+        private void NavButton1_Click(object sender, RoutedEventArgs e)
+        {
+            Resultlabel.Content = "";
+            foreach(var man in
+                App.EfDataContext
+                .Managers
+                .Include(m => m.MainDepartment)
+                .Take(10))
+            {
+                Resultlabel.Content += $"{man.Surname} {man.MainDepartment.Name}\n";
+            }
+            Resultlabel.Content += "\n";
+                foreach(var str in
+                App.EfDataContext 
+                .Departments
+                .Include(d => d.MainWorkers)
+                .Select(d => $"{d.Name} {d.MainWorkers.Count}"))
+            {
+                Resultlabel.Content += $"{str}\n";
+            }
+        }
+
+        private void NavButton2_Click(object sender, RoutedEventArgs e)
+        {
+            Resultlabel.Content = "";
+            foreach (var str in
+                App.EfDataContext
+                .Managers
+                .Include(m => m.SecondaryWorkers)
+                .Select(m => $"{m.Surname} {(m.SecondaryDepartment == null ? "--" : m.SecondaryDepartment.Name)}"))
+                /*.Take(10))*/
+            {
+                Resultlabel.Content += $"{str}\n";
+            }
         }
     }
 }

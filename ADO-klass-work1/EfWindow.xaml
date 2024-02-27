@@ -21,8 +21,12 @@
             <Label Content="--" x:Name="SaleCountLabel"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,217,0,0">
-            <Button Content="SELECT" x:Name="SelectButton" Click="SelectButton_Click"/>
-            <Button x:Name="CheapButton" Content="Cheap" Click="CheapButton_Click" Margin="5"/>
+            <Button Content="SELECT" x:Name="SelectButton" Click="SelectButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button x:Name="CheapButton" Content="Cheap" Click="CheapButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="Sales" x:Name="SalestButton" Click="SalestButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="ProductSales" x:Name="ProductSalesButton" Click="ProductSalesButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="NavButton1" x:Name="NavButton1" Click="NavButton1_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="NavButton2" x:Name="NavButton2" Click="NavButton2_Click" Margin="5" Height="20" Width="100"/>
             <Label x:Name="Resultlabel"/>
         </StackPanel>
     </Grid>

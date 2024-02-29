@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ADO_klass_work1.EfContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -145,15 +146,27 @@ namespace ADO_klass_work1
 
         private void NavButton2_Click(object sender, RoutedEventArgs e)
         {
-            Resultlabel.Content = "";
+           /* Resultlabel.Content = "";
             foreach (var str in
                 App.EfDataContext
                 .Managers
                 .Include(m => m.SecondaryWorkers)
                 .Select(m => $"{m.Surname} {(m.SecondaryDepartment == null ? "--" : m.SecondaryDepartment.Name)}"))
-                /*.Take(10))*/
+                *//*.Take(10))*//*
             {
                 Resultlabel.Content += $"{str}\n";
+            }*/
+        }
+
+        private void ChiefButton_Click(object sender, RoutedEventArgs e)
+        {
+            Resultlabel.Content = "";
+            foreach(Manager man in
+            App.EfDataContext
+                .Managers
+                .Include(m => m.Chief))
+            {
+                Resultlabel.Content += $"{man.Surname} -- {man.Chief?.Surname ?? "NOOOOO!!!!"}\n";
             }
         }
     }

@@ -35,6 +35,12 @@ namespace ADO_klass_work1.EfContext
               .WithMany(d => d.SecondaryWorkers)
               .HasForeignKey(m => m.IdSecDep);
 
+            modelBuilder.Entity<Manager>()
+                .HasOne(m => m.Chief)
+                .WithMany(c => c.Subordinates)
+                .HasForeignKey(m => m.IdChief)
+                .HasPrincipalKey(c=>c.Id);  //Можно не писать 
+
             SeedDepartments(modelBuilder);
             SeedProducts(modelBuilder);
             SeedManagers(modelBuilder);

@@ -21,5 +21,7 @@ namespace ADO_klass_work1.EfContext
 
         public Manager? Chief { get; set; }
         public IEnumerable<Manager> Subordinates { get; set; }
+        public IEnumerable<Sale> Sales {  get; set; }
+
     }
 }

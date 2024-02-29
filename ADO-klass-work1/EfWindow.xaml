@@ -29,6 +29,8 @@
             <Button Content="NavButton1" x:Name="NavButton1" Click="NavButton1_Click" Margin="5" Height="20" Width="100"/>
             <Button Content="NavButton2" x:Name="NavButton2" Click="NavButton2_Click" Margin="5" Height="20" Width="100"/>
             <Button Content="ChiefButton" x:Name="ChiefButton" Click="ChiefButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="SubOrdinates" x:Name="SubOrdinatesButton" Click="SubOrdinatesButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="SalesPrudButton" x:Name="SalesPrudButton" Click="SalesPrudButton_Click" Margin="5" Height="20" Width="100"/>
         </UniformGrid>
         <ScrollViewer Grid.Column="2">
             <Label x:Name="Resultlabel"/>

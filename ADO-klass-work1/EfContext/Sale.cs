@@ -14,5 +14,8 @@ namespace ADO_klass_work1.EfContext
         public Guid ManagerId { get; set; }
         public DateTime SaleDt { get; set; }
         public DateTime? DeleteDt { get; set; }
+        ///////////////////NAVIGATION///////////////
+        public Manager Manager { get; set; } 
+        public Product Product { get; set; }
     }
 }

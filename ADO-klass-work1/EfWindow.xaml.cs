@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static Org.BouncyCastle.Asn1.Cmp.Challenge;
+
 
 namespace ADO_klass_work1
 {
@@ -167,6 +167,31 @@ namespace ADO_klass_work1
                 .Include(m => m.Chief))
             {
                 Resultlabel.Content += $"{man.Surname} -- {man.Chief?.Surname ?? "NOOOOO!!!!"}\n";
+            }
+        }
+
+        private void SubOrdinatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            Resultlabel.Content = "";
+            foreach (Manager man in
+            App.EfDataContext
+                .Managers
+                .Include(m => m.Subordinates))
+            {
+                Resultlabel.Content += $"{man.Surname} -- {String.Join(",", man.Subordinates.Select(m=>m.Surname))}\n";
+            }
+        }
+
+        private void SalesPrudButton_Click(object sender, RoutedEventArgs e)
+        {
+            Resultlabel.Content = "";
+            foreach (Product p in
+            App.EfDataContext
+                .Products
+                .Include(p => p.Sales))
+            {
+                int cheksToday = p.Sales.Where(s => SalesDt.Date == date).Count();
+                Resultlabel.Content += $"{p.Name} -- {checksToday}\n";
             }
         }
     }

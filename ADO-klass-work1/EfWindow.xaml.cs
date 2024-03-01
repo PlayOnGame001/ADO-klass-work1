@@ -184,7 +184,7 @@ namespace ADO_klass_work1
 
         private void SalesPrudButton_Click(object sender, RoutedEventArgs e)
         {
-            Resultlabel.Content = "";
+          /*  Resultlabel.Content = "";
             foreach (Product p in
             App.EfDataContext
                 .Products
@@ -192,7 +192,7 @@ namespace ADO_klass_work1
             {
                 int cheksToday = p.Sales.Where(s => SalesDt.Date == date).Count();
                 Resultlabel.Content += $"{p.Name} -- {checksToday}\n";
-            }
+            }*/
         }
     }
 }

@@ -48,5 +48,12 @@ namespace ADO_klass_work1
             new EfWindow().ShowDialog();
             this.Show();
         }
+
+        private void EfCrudButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new EfCrudWindow().ShowDialog();
+            this.Show();
+        }
     }
 }

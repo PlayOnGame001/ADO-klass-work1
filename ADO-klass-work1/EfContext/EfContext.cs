@@ -41,12 +41,12 @@ namespace ADO_klass_work1.EfContext
                 .HasForeignKey(m => m.IdChief)
                 .HasPrincipalKey(c=>c.Id);  //Можно не писать 
 
-            modelBuilder.Entity<Sale>()
+           /* modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Manager)
                 .WithMany(m => m.Sales);
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Product)
-                .WithMany(p => p.Sales);
+                .WithMany(p => p.Sales);*/
 
             SeedDepartments(modelBuilder);
             SeedProducts(modelBuilder);

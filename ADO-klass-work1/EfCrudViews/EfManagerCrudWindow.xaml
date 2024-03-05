@@ -17,16 +17,19 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Content="Редактируем отдел" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
-        <Label Content="Id" Grid.Row="1"/>
-        <TextBox IsReadOnly="True" Text="{Binding Model.Id, Mode=OneWay}" Grid.Column="1" Grid.Row="1"/>
+        <Label Content="Редактируем работника" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        <Label Content="Фамилия" Grid.Row="1"/>
+        <TextBox Text="{Binding Model.Surname}" Grid.Column="1" Grid.Row="1"/>
         <Label Content="Имя" Grid.Row="2"/>
         <TextBox  Text="{Binding Model.Name}" Grid.Column="1" Grid.Row="2"/>
-        <Label Content="Translet" Grid.Row="3"/>
-        <TextBox  Text="{Binding Model.InternationalName}" Grid.Column="1" Grid.Row="3"/>
-        <UniformGrid Grid.Row="4" Grid.ColumnSpan="2" Rows="1">
+        <Label Content="Отчество" Grid.Row="3"/>
+        <TextBox  Text="{Binding Model.Secname}" Grid.Column="1" Grid.Row="3"/>
+        <Label Content="Отдел" Grid.Row="4"/>
+        <ComboBox ItemsSource="{Binding Model.Departments}"  Grid.Column="1" Grid.Row="4"/>
+        <UniformGrid Grid.Row="5" Grid.ColumnSpan="2" Rows="1">
             <Button x:Name="DeletButton"  Content="Delet"  Margin=" 10 5" Click="DeletButton_Click"/>
             <Button x:Name="SaveButton"   Content="Save"   Margin=" 10 5" Click="SaveButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" Margin=" 10 5" Click="CancelButton_Click"/>

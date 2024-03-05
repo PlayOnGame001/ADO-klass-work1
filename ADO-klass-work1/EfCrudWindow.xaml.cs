@@ -34,6 +34,7 @@ namespace ADO_klass_work1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadData();
+            LoadMangersData();
         }
         private void LoadMangersData()
         {
@@ -114,7 +115,14 @@ namespace ADO_klass_work1
 
         private void ListViewItem_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
-
+            if(sender is ListViewItem item && item.Content is Manager manager)
+            {
+                EfManagerCrudWindow dialog = new( new ManagerModel(manager)
+                {
+                    Departments = App.EfDataContext.Departments.Select(d=>d.Name).ToList(),
+                });
+                dialog.ShowDialog();
+            }
         }
 
         private void DepartmetsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

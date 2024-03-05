@@ -4,6 +4,7 @@ using ADO_klass_work1.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,13 +24,22 @@ namespace ADO_klass_work1
     /// </summary>
     public partial class EfCrudWindow : Window
     {
+        private ICollectionView departmentsView;
+        private readonly Predicate<Object> departmentsFilter = obj => (obj as Department)?.DeleteDt == null;
         public EfCrudWindow()
         {
             InitializeComponent();
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadData();
+        }
+        private void LoadMangersData()
+        {
+            ManagersListView.ItemsSource = null;
+            App.EfDataContext.Managers.Load();
+            ManagersListView.ItemsSource = App.EfDataContext.Managers.Local.ToObservableCollection();
         }
         private void LoadData()
         {
@@ -41,6 +51,8 @@ namespace ADO_klass_work1
                 .Departments
                 .Local
                 .ToObservableCollection();
+            departmentsView = CollectionViewSource.GetDefaultView(DepartmetsListView.ItemsSource);
+            departmentsView.Filter = obj => (obj as Department)?.DeleteDt == null;
         }
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -67,6 +79,45 @@ namespace ADO_klass_work1
         }
 
         private void AddDepartmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            Department department = new()
+            {
+                Id = Guid.NewGuid(),
+            };
+            EfDepartmentCrudWindow dialog = new(DepartmentModel.FromEntity(department));
+            dialog.ShowDialog();
+            if (dialog.Action == CrudActions.Update)
+            {
+                department.Name = dialog.Model.Name;
+                department.InternationlName = dialog.Model.InternationalName;
+                App.EfDataContext.Add(department);
+                App.EfDataContext.SaveChanges();
+                LoadData();
+            }
+        }
+
+        private void AllDepartmensButton_Click(object sender, RoutedEventArgs e)
+        {
+            departmentsView.Filter = departmentsView.Filter == null
+            ? departmentsFilter : null;
+        }
+
+        private void AddManagers_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AllManagers_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListViewItem_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void DepartmetsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

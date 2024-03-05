@@ -32,16 +32,19 @@ namespace ADO_klass_work1.EfCrudViews
         private void DeletButton_Click(object sender, RoutedEventArgs e)
         {
             Action = CrudActions.Delete;
+            Close();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Action = CrudActions.Update;
+            Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Action = CrudActions.None;
+            Close();
         }
     }
 }

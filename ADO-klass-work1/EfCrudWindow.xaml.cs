@@ -34,6 +34,7 @@ namespace ADO_klass_work1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadData();
+            LoadProdData();
             LoadMangersData();
         }
         private void LoadMangersData()
@@ -78,7 +79,17 @@ namespace ADO_klass_work1
                 }
             }
         }
+        private void LoadProdData()
+        {
+            ProductListView.ItemsSource = null;
 
+            App.EfDataContext.Products.Load();
+
+            ProductListView.ItemsSource = App.EfDataContext
+                .Products
+                .Local
+                .ToObservableCollection();
+        }
         private void AddDepartmentButton_Click(object sender, RoutedEventArgs e)
         {
             Department department = new()
@@ -119,13 +130,24 @@ namespace ADO_klass_work1
             {
                 EfManagerCrudWindow dialog = new( new ManagerModel(manager)
                 {
-                    Departments = App.EfDataContext.Departments.Select(d=>d.Name).ToList(),
+                    Departments = App.EfDataContext.Departments.Select(d=> new IdName { Id=d.Id, Name =d.Name}).ToList(),
+                   
                 });
                 dialog.ShowDialog();
             }
         }
 
         private void DepartmetsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

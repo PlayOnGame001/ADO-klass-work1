@@ -38,6 +38,36 @@
                 </ListView.Resources>
             </ListView>
         </StackPanel>
+        <StackPanel Grid.Row="3">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" x:Name="AddProductButton" Content="+" Padding="7 2" Click="AddProductButton_Click"/>
+                <Label Content="Продукти" FontSize="16" HorizontalContentAlignment="Center"/>
+            </DockPanel>
+            <ListView x:Name="ProductListView" SelectionChanged="ProductListView_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn 
+                           Header="Id"
+                           DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn 
+                           Header="Name"
+                           DisplayMemberBinding="{Binding Path=Name}"/>
+                        <GridViewColumn 
+                           Header="Price"
+                           DisplayMemberBinding="{Binding Path=Price}"/>
+                        <GridViewColumn 
+                           Header="DeleteDt"
+                           DisplayMemberBinding="{Binding Path=DeleteDt}"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="MouseDoubleClick"
+                                Handler="ListViewItem_MouseDoubleClick_1"/>
+                    </Style>
+                </ListView.Resources>
+            </ListView>
+        </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <DockPanel>
                 <Button DockPanel.Dock="Right" x:Name="AddManagers"  Content="+" Padding="7 3" Click="AddManagers_Click"/>

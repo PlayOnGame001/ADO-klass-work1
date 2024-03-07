@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADO_klass_work1.EfCrudViews"
         mc:Ignorable="d"
-        Title="EfManagerCrudWindow" Height="220" Width="400">
+        Loaded="Window_Loaded"
+        Title="EfManagerCrudWindow" Height="320" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -27,9 +31,19 @@
         <TextBox  Text="{Binding Model.Name}" Grid.Column="1" Grid.Row="2"/>
         <Label Content="Отчество" Grid.Row="3"/>
         <TextBox  Text="{Binding Model.Secname}" Grid.Column="1" Grid.Row="3"/>
-        <Label Content="Отдел" Grid.Row="4"/>
-        <ComboBox ItemsSource="{Binding Model.Departments}"  Grid.Column="1" Grid.Row="4"/>
-        <UniformGrid Grid.Row="5" Grid.ColumnSpan="2" Rows="1">
+        <Label Content="Отдел" Grid.Row="4" />
+        <ComboBox x:Name="MainDepComboBox" ItemsSource="{Binding Model.Departments}"  Grid.Column="1" Grid.Row="4" Margin="0 1"/>
+        <Label Content="Смесь" Grid.Row="5"/>
+        <DockPanel Grid.Column="2" Grid.Row="5" Margin="0 1">
+            <Button DockPanel.Dock="Right" Content="X" Padding="10 0" x:Name="ClearSecDep" Click="ClearSecDep_Click"/>
+            <ComboBox x:Name ="SecDepComboBox" ItemsSource="{Binding Model.Departments}"/>
+        </DockPanel>
+        <Label Content="Управляющий" Grid.Row="6"/>
+        <DockPanel Grid.Column="2" Grid.Row="6" Margin="0 1">
+            <Button DockPanel.Dock="Right" Content="X" Padding="10 0" x:Name="CheifBox" Click="CheifBoxClear_Click" Width="29"/>
+            <ComboBox x:Name ="CheifComboBox" ItemsSource="{Binding Model.Chiefs}" SelectionChanged="CheifComboBox_SelectionChanged"/>
+        </DockPanel>
+        <UniformGrid Grid.Row="8" Grid.ColumnSpan="2" Rows="1">
             <Button x:Name="DeletButton"  Content="Delet"  Margin=" 10 5" Click="DeletButton_Click"/>
             <Button x:Name="SaveButton"   Content="Save"   Margin=" 10 5" Click="SaveButton_Click"/>
             <Button x:Name="CancelButton" Content="Cancel" Margin=" 10 5" Click="CancelButton_Click"/>

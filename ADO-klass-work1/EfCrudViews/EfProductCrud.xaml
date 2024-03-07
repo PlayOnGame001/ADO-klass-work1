@@ -1,0 +1,44 @@
+﻿<Window x:Class="ADO_klass_work1.EfCrudViews.EfProductCrud"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ADO_klass_work1.EfCrudViews"
+        mc:Ignorable="d"
+        Title="EfProductCrud" Height="240" Width="400">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Редагуємо продукт" Grid.ColumnSpan="2"
+           HorizontalAlignment="Center" FontSize="18"/>
+
+        <Label Content="Ідентифікатор:" Grid.Row="1"/>
+        <TextBox IsReadOnly="True" 
+             Text="{Binding Model.Id, Mode=OneWay}" Grid.Row="1" Grid.Column="1"/>
+
+        <Label Content="Назва:" Grid.Row="2"/>
+        <TextBox Text="{Binding Model.Name, Mode=TwoWay}" Grid.Row="2" Grid.Column="1"/>
+
+        <Label Content="Ціна:" Grid.Row="3"/>
+        <TextBox Text="{Binding Model.Price, Mode=TwoWay}" Grid.Row="3" Grid.Column="1"/>
+
+        <UniformGrid Grid.Row="5" Grid.ColumnSpan="2" Rows="1">
+            <Button x:Name="DeleteButton" Content="Видалити"  Click="DeleteButton_Click"/>
+            <Button x:Name="SaveButton"   Content="Зберігти"  Click="SaveButton_Click"/>
+            <Button x:Name="CancelButton" Content="Скасувати" Click="CancelButton_Click"/>
+        </UniformGrid>
+    </Grid>
+</Window>

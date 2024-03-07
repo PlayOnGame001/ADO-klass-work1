@@ -22,8 +22,8 @@ namespace ADO_klass_work1.EfCrudViews
     /// </summary>
     public partial class EfManagerCrudWindow : Window
     {
-        public ManagerModel Model { get; init; }
-        public CrudActions Action { get; private set; }
+         public ManagerModel Model { get; init; }
+         public CrudActions Action { get; private set; }
          public EfManagerCrudWindow(ManagerModel model)
          {
         InitializeComponent();
@@ -31,7 +31,14 @@ namespace ADO_klass_work1.EfCrudViews
         this.DataContext = this;
         Action = CrudActions.None;
          }
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainDepComboBox.SelectedItem = this.Model.Departments.First(idName => idName.Id == Model.MainDep.Id);
+            if(Model.SecDep != null) 
+            {
+                SecDepComboBox.SelectedItem = this.Model.Departments.First(idName => idName.Id == Model.SecDep.Id);
+            }
+        }
         private void DeletButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -45,6 +52,21 @@ namespace ADO_klass_work1.EfCrudViews
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ClearSecDep_Click(object sender, RoutedEventArgs e)
+        {
+            SecDepComboBox.SelectedItem = null;
+        }
+
+        private void CheifComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CheifBoxClear_Click(object sender, RoutedEventArgs e)
+        {
+            CheifComboBox.SelectedIndex = -1;
         }
     }
 }

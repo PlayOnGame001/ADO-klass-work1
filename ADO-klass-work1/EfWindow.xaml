@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ADO_klass_work1"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="EfWindow" Height="450" Width="800">
+        Title="EfWindow" Height="450" Width="800"
+        Background="Bisque">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="238*"/>

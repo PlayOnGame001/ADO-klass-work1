@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADO_klass_work1"
         mc:Ignorable="d"
-        Title="IntroWindow" Height="450" Width="900">
+        Title="IntroWindow" Height="450" Width="900"
+        Background="Bisque">
     <StackPanel Orientation="Vertical">
         <Label Content="Вступ. Підключення БД" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold"/>
         <StackPanel Orientation="Horizontal">

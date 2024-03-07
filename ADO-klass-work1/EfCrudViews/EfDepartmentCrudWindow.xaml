@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADO_klass_work1.EfCrudViews"
         mc:Ignorable="d"
-        Title="EfDepartmentCrudWindow" Height="220" Width="400">
+        Title="EfDepartmentCrudWindow" Height="220" Width="400"
+        Background="Bisque">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

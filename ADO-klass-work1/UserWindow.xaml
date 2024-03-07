@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ADO_klass_work1"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="UserWindow" Height="309" Width="500">
+        Title="UserWindow" Height="309" Width="500"
+        Background="Bisque">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="86*"/>

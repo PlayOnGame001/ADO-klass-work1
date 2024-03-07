@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ADO_klass_work1"
         mc:Ignorable="d"
          Loaded="Window_Loaded"
-        Title="EfCrudWindow" Height="450" Width="800">
+        Title="EfCrudWindow" Height="450" Width="800"
+        Background="Bisque">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

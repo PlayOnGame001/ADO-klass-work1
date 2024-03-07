@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ADO_klass_work1.EfCrudViews"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="EfManagerCrudWindow" Height="320" Width="400">
+        Title="EfManagerCrudWindow" Height="320" Width="400"
+        Background="Bisque">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

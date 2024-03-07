@@ -21,7 +21,7 @@
             <Label Content="Sale"/>
             <Label Content="--" x:Name="SaleCountLabel"/>
         </StackPanel>
-        <UniformGrid Margin="0,0,2,0" Grid.Column="1">
+        <UniformGrid Margin="0,0, 2,0" Grid.Column="1">
             <Button Content="SELECT" x:Name="SelectButton" Click="SelectButton_Click" Margin="5" Height="20" Width="100"/>
             <Button x:Name="CheapButton" Content="Cheap" Click="CheapButton_Click" Margin="5" Height="20" Width="100"/>
             <Button Content="Sales" x:Name="SalestButton" Click="SalestButton_Click" Margin="5" Height="20" Width="100"/>
@@ -31,6 +31,9 @@
             <Button Content="ChiefButton" x:Name="ChiefButton" Click="ChiefButton_Click" Margin="5" Height="20" Width="100"/>
             <Button Content="SubOrdinates" x:Name="SubOrdinatesButton" Click="SubOrdinatesButton_Click" Margin="5" Height="20" Width="100"/>
             <Button Content="SalesPrudButton" x:Name="SalesPrudButton" Click="SalesPrudButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="Sales Today" x:Name="SalesTodayProdButton" Click="SalesTodayProdButton_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="Info" x:Name="Info" Click="Info_Click" Margin="5" Height="20" Width="100"/>
+            <Button Content="Manager" x:Name="Manager" Click="Manager_Click" Margin="5" Height="20" Width="100"/>
         </UniformGrid>
         <ScrollViewer Grid.Column="2">
             <Label x:Name="Resultlabel"/>

@@ -194,6 +194,103 @@ namespace ADO_klass_work1
                 Resultlabel.Content += $"{p.Name} -- {checksToday}\n";
             }*/
         }
+
+        private void SalesTodayProdButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime date = new(2023, 03, 02);
+            Resultlabel.Content = "";
+            foreach (Product p in
+                    App.EfDataContext
+                        .Products
+                        .Include(p => p.Sales
+                        .Where(s => s.SaleDt.Date == date)))
+            {
+                int checksToday = p.Sales.Count();
+                int quantity = p.Sales.Select(s => s.Quantity).Sum();
+                float totalCost = (float)p.Sales.Select(s => s.Quantity * s.Product.Price).Sum();
+
+                Resultlabel.Content += $"{p.Name}" +
+                    $"{(p.Name.Length > 16 ? "\t" : "\t\t")}" +
+                    $"-- {checksToday} чеків \t--  {quantity} шт.  \t--  {totalCost} грн.\n";
+            }
+        }
+
+        private void SalesProdButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime date = new(2023, 03, 02);
+            Resultlabel.Content = "";
+            foreach (Product p in
+                 App.EfDataContext
+                    .Products
+                    .Include(p => p.Sales))
+            {
+                int checksToday = p.Sales.Where(s => s.SaleDt.Date == date).Count();
+                Resultlabel.Content += $"{p.Name} -- {checksToday}\n";
+            }
+        }
+
+        private void Info_Click(object sender, RoutedEventArgs e)
+        {
+            Resultlabel.Content = "";
+            var shortestProduct = App.EfDataContext
+            .Products
+            .Select(p => p.Name)
+            .Min();
+            var random = new Random();
+            var randomManagerIndex = random.Next(0, App.EfDataContext.Managers.Count());
+            var randomProductIndex = random.Next(0, App.EfDataContext.Products.Count());
+
+            var randomManager = App.EfDataContext
+                .Managers
+                .OrderBy(e => e.Id)
+                .Skip(randomManagerIndex)
+                .FirstOrDefault();
+
+            var randomProduct = App.EfDataContext
+                .Products
+                .OrderBy(p => p.Id)
+                .Skip(randomProductIndex)
+                .FirstOrDefault();
+
+            var randomSaleDate = new DateTime(
+                2023, random.Next(1, 13), random.Next(1, 29),
+                random.Next(9, 20), random.Next(0, 60), random.Next(0, 60));
+
+            Resultlabel.Content += $"Товар з найкоротшою назвою --- {shortestProduct}\n" +
+                                   $"Випадковий товар --- {randomProduct.Name} --- {randomProduct.Price} грн\n" +
+                                   $"Випадковий менеджер --- {randomManager.Surname} {randomManager.Name}\n" +
+                                   $"Випадковий час продажу --- {randomSaleDate}";
+        }
+
+        private void Manager_Click(object sender, RoutedEventArgs e)
+        {
+            Resultlabel.Content = "";
+
+            DateTime date = DateTime.Now.AddYears(-1).Date;
+            //StatisticLabel.Content += $"Статистика за {date.ToShortDateString()} число\n";
+
+            /* Вивести статистику продажів по менеджерах за "сьогодні" -
+               тільки за торік (2023) */
+            var query = App.EfDataContext.Managers                   // FROM Managers M
+                .GroupJoin(
+                    App.EfDataContext.Sales,                         // LEFT JOIN Sales S
+                    m => m.Id,                                       // ON M.Id =
+                    s => s.ManagerId,                                //      S.ManagerId
+                    (manager, sales) => new                          // GROUP BY M
+                    {
+                        Name = manager.Surname + ' ' + manager.Name, // SELECT E.Name AS Name,
+                        TotalSales = sales                           // SUM(S.Quantity) AS TotalSales
+                        .Where(s => s.SaleDt.Date == date)           // WHERE S.SaleDate.Date = today
+                        .Sum(s => s.Quantity),
+                    }
+                );
+
+            foreach (var item in query)
+            {
+                Resultlabel.Content += $"{item.Name} --- {item.TotalSales}\n";
+            }
+        }
+
     }
 }
 

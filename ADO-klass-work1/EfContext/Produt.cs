@@ -13,6 +13,7 @@ namespace ADO_klass_work1.EfContext
         public double Price { get; set; }
         public DateTime? DeleteDt { get; set; }
         public String? InternationlProduct { get; set; }
+        public IEnumerable<Sale> Sales { get; set; }
     }
 }
 

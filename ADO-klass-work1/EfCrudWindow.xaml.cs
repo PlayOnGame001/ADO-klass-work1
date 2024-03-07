@@ -151,5 +151,50 @@ namespace ADO_klass_work1
         {
 
         }
+        private void ListViewItem_MouseDoubleClick_2(object sender, RoutedEventArgs e)
+        {
+            if (sender is ListViewItem item && item.Content is Product product)
+            {
+                EfProductCrud dialog = new(ProductModels.FromEntity(product));
+                dialog.ShowDialog();
+
+                if (dialog.Action == CrudActions.Update)
+                {
+                    product.Name = dialog.Model.Name;
+                    product.Price = dialog.Model.Price;
+                    App.EfDataContext.SaveChanges();
+                    LoadProdData();
+                }
+                if (dialog.Action == CrudActions.Delete)
+                {
+                    product.DeleteDt = DateTime.Now;
+                    App.EfDataContext.SaveChanges();
+                    LoadProdData();
+                }
+            }
+        }
+        private void ListViewItem_MouseDoubleClick_2(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListViewItem item && item.Content is Product product)
+            {
+                EfProductCrud dialog = new(ProductModels.FromEntity(product));
+                dialog.ShowDialog();
+
+                if (dialog.Action == CrudActions.Update)
+                {
+                    product.Name = dialog.Model.Name;
+                    product.Price = dialog.Model.Price;
+                    App.EfDataContext.SaveChanges();
+                    LoadProdData();
+                }
+                if (dialog.Action == CrudActions.Delete)
+                {
+                    product.DeleteDt = DateTime.Now;
+                    App.EfDataContext.SaveChanges();
+                    LoadProdData();
+                }
+            }
+        }
     }
 }
+

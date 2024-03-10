@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ADO_klass_work1
 {
@@ -26,6 +27,7 @@ namespace ADO_klass_work1
     {
         private ICollectionView departmentsView;
         private readonly Predicate<Object> departmentsFilter = obj => (obj as Department)?.DeleteDt == null;
+        private Task? dbTask;
         public EfCrudWindow()
         {
             InitializeComponent();
@@ -36,6 +38,7 @@ namespace ADO_klass_work1
             LoadData();
             LoadProdData();
             LoadMangersData();
+            LoadSaleProdData();
         }
         private void LoadMangersData()
         {
@@ -90,6 +93,16 @@ namespace ADO_klass_work1
                 .Local
                 .ToObservableCollection();
         }
+        private void LoadSaleProdData()
+        {
+            SaleProduct.ItemsSource = null;
+            App.EfDataContext.Sales.Load();
+            SaleProduct.ItemsSource = App.EfDataContext
+                .Sales
+                .Local
+                .ToObservableCollection();
+        }
+
         private void AddDepartmentButton_Click(object sender, RoutedEventArgs e)
         {
             Department department = new()
@@ -116,7 +129,8 @@ namespace ADO_klass_work1
 
         private void AddManagers_Click(object sender, RoutedEventArgs e)
         {
-
+            Manager entity = new() { Id = Guid.NewGuid() };
+            ManagerModel model = new(entity);
         }
 
         private void AllManagers_Click(object sender, RoutedEventArgs e)
@@ -126,14 +140,37 @@ namespace ADO_klass_work1
 
         private void ListViewItem_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
-            if(sender is ListViewItem item && item.Content is Manager manager)
+            if (sender is ListViewItem item && item.Content is Manager manager)
             {
-                EfManagerCrudWindow dialog = new( new ManagerModel(manager)
+                EfManagerCrudWindow dialog = new(new ManagerModel(manager)
                 {
-                    Departments = App.EfDataContext.Departments.Select(d=> new IdName { Id=d.Id, Name =d.Name}).ToList(),
-                   
+                    Departments = App.EfDataContext.Departments.Select(d => new IdName { Id = d.Id, Name = d.Name }).ToList(),
+
+                    Chiefs = App.EfDataContext.Chiefs.Select(m => new IdName { Id = m.Id, Name = $"{m.Surname} {m.Name[0]}. {m.Secname[0]}"
+                })
+                .ToList(),
                 });
                 dialog.ShowDialog();
+                if(dialog.Action == CrudActions.Update)
+                {
+                    manager.Surname = dialog.Model.Surname;
+                    manager.Name = dialog.Model.Name;
+                    manager.Secname = dialog.Model.Secname;
+                    manager.IdMainDep = dialog.Model.MainDep.Id;
+                    manager.IdSecDep = dialog.Model.SecDep ? .Id;
+                    manager.IdChief = dialog.Model.Chef?.Id;
+                    dbTask = App.EfDataContext.SaveChangesAsync().ContinueWith(_ => Dispatcher.Invoke(LoadMangersData));
+                }
+                else if(dialog.Action == CrudActions.Delete)
+                {
+                    manager.DeleteDt = DateTime.Now;
+                }
+                if(dialog.Action != CrudActions.None)
+                {
+                    dbTask = App.EfDataContext
+                        .SaveChangesAsync()
+                        .ContinueWith(_ => Dispatcher.Invoke (LoadMangersData));
+                }
             }
         }
 
@@ -194,6 +231,30 @@ namespace ADO_klass_work1
                     LoadProdData();
                 }
             }
+        }
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            dbTask?.Wait();
+        }
+
+        private void AddSaleButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaleProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ManagersListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ListViewItem_MouseDoubleClick_3(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

@@ -28,8 +28,11 @@ namespace ADO_klass_work1.Models
                 Id = entity.SecondaryDepartment.Id,
                 Name = entity.SecondaryDepartment.Name,
             };
+            Chef = entity.Chief == null ? null : new IdName
+            {
+                Id = entity.Chief.Id,
+                Name = $"{entity.Chief.Surname} {entity.Chief.Name[0]}. {entity.Chief.Secname[0]}."
+            };
         }
-
-
     }
 }

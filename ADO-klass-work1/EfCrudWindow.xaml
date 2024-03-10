@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ADO_klass_work1"
         mc:Ignorable="d"
-         Loaded="Window_Loaded"
-        Title="EfCrudWindow" Height="450" Width="800"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Title="EfCrudWindow" Height="550" Width="900"
         Background="Bisque">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -44,21 +45,13 @@
                 <Button DockPanel.Dock="Right" x:Name="AddProductButton" Content="+" Padding="7 2" Click="AddProductButton_Click"/>
                 <Label Content="Продукти" FontSize="16" HorizontalContentAlignment="Center"/>
             </DockPanel>
-            <ListView x:Name="ProductListView" SelectionChanged="ProductListView_SelectionChanged">
+            <ListView x:Name="ProductListView" SelectionChanged="ProductListView_SelectionChanged" MaxHeight="200" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="193">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn 
-                           Header="Id"
-                           DisplayMemberBinding="{Binding Path=Id}"/>
-                        <GridViewColumn 
-                           Header="Name"
-                           DisplayMemberBinding="{Binding Path=Name}"/>
-                        <GridViewColumn 
-                           Header="Price"
-                           DisplayMemberBinding="{Binding Path=Price}"/>
-                        <GridViewColumn 
-                           Header="DeleteDt"
-                           DisplayMemberBinding="{Binding Path=DeleteDt}"/>
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                        <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}"/>
+                        <GridViewColumn Header="DeleteDt" DisplayMemberBinding="{Binding Path=DeleteDt}"/>
                     </GridView>
                 </ListView.View>
                 <ListView.Resources>
@@ -74,7 +67,7 @@
                 <Button DockPanel.Dock="left" x:Name="AllManagers"  Content="Hide" Padding="7 3" Click="AllManagers_Click"/>
                 <Label Content="Работники" HorizontalAlignment="Center"/>
             </DockPanel>
-            <ListView x:Name="ManagersListView" MaxHeight="200" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="193">
+            <ListView x:Name="ManagersListView" MaxHeight="200" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="193" SelectionChanged="ManagersListView_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
@@ -87,6 +80,30 @@
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick_1"/>
+                    </Style>
+                </ListView.Resources>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" x:Name="AddSaleButton" Content="+" Padding="7 2" Click="AddSaleButton_Click"/>
+                <Label Content="Продажи" FontSize="16" HorizontalContentAlignment="Center"/>
+            </DockPanel>
+            <ListView x:Name="SaleProduct" ScrollViewer.VerticalScrollBarVisibility="Visible" Height="193" SelectionChanged="SaleProduct_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Path=Quantity}"/>
+                        <GridViewColumn Header="Sale" DisplayMemberBinding="{Binding Path=Sales}"/>
+                        <GridViewColumn Header="DeleteDt" DisplayMemberBinding="{Binding Path=SaleDt}"/>
+                        <GridViewColumn Header="ProductrId" DisplayMemberBinding="{Binding Path=ProductrId}"/>
+                        <GridViewColumn Header="ManagerId" DisplayMemberBinding="{Binding Path=ManagerId}"/>
+                        <GridViewColumn Header="DeletDt" DisplayMemberBinding="{Binding Path=DeletDt}"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick_3"/>
                     </Style>
                 </ListView.Resources>
             </ListView>

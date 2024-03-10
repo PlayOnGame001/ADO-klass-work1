@@ -38,20 +38,28 @@ namespace ADO_klass_work1.EfCrudViews
             {
                 SecDepComboBox.SelectedItem = this.Model.Departments.First(idName => idName.Id == Model.SecDep.Id);
             }
+
+            if(Model.Chef != null)
+            {
+                CheifComboBox.SelectedItem = Model.Chiefs.First(m => m.Id == Model.Chef.Id);
+            }
         }
         private void DeletButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Action = CrudActions.Delete;
+            Close();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Action = CrudActions.Update;
+            Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Action = CrudActions.None;
+            Close();
         }
 
         private void ClearSecDep_Click(object sender, RoutedEventArgs e)
@@ -61,12 +69,23 @@ namespace ADO_klass_work1.EfCrudViews
 
         private void CheifComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Model.Chef = CheifComboBox.SelectedItem as IdName;
         }
 
         private void CheifBoxClear_Click(object sender, RoutedEventArgs e)
         {
             CheifComboBox.SelectedIndex = -1;
         }
+
+        private void SecDepComboBox_Selected(object sender, RoutedEventArgs e)
+        {
+            Model.SecDep = SecDepComboBox.SelectedItem as IdName;
+        }
+
+        private void MainDepComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Model.MainDep = (IdName)MainDepComboBox.SelectedItem;
+        }
+
     }
 }

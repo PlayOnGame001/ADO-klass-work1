@@ -61,12 +61,12 @@ namespace ADO_klass_work1
         }
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if(sender is ListViewItem item && item.Content is Department department) 
+            if (sender is ListViewItem item && item.Content is Department department)
             {
                 EfDepartmentCrudWindow dialog = new(DepartmentModel.FromEntity(department));
-               dialog.ShowDialog();
+                dialog.ShowDialog();
 
-                if(dialog.Action == CrudActions.Update)
+                if (dialog.Action == CrudActions.Update)
                 {
                     department.Name = dialog.Model.Name;
                     department.InternationlName = dialog.Model.InternationalName;
@@ -146,30 +146,33 @@ namespace ADO_klass_work1
                 {
                     Departments = App.EfDataContext.Departments.Select(d => new IdName { Id = d.Id, Name = d.Name }).ToList(),
 
-                    Chiefs = App.EfDataContext.Chiefs.Select(m => new IdName { Id = m.Id, Name = $"{m.Surname} {m.Name[0]}. {m.Secname[0]}"
-                })
+                    Chiefs = App.EfDataContext.Chiefs.Select(m => new IdName
+                    {
+                        Id = m.Id,
+                        Name = $"{m.Surname} {m.Name[0]}. {m.Secname[0]}"
+                    })
                 .ToList(),
                 });
                 dialog.ShowDialog();
-                if(dialog.Action == CrudActions.Update)
+                if (dialog.Action == CrudActions.Update)
                 {
                     manager.Surname = dialog.Model.Surname;
                     manager.Name = dialog.Model.Name;
                     manager.Secname = dialog.Model.Secname;
                     manager.IdMainDep = dialog.Model.MainDep.Id;
-                    manager.IdSecDep = dialog.Model.SecDep ? .Id;
+                    manager.IdSecDep = dialog.Model.SecDep?.Id;
                     manager.IdChief = dialog.Model.Chef?.Id;
                     dbTask = App.EfDataContext.SaveChangesAsync().ContinueWith(_ => Dispatcher.Invoke(LoadMangersData));
                 }
-                else if(dialog.Action == CrudActions.Delete)
+                else if (dialog.Action == CrudActions.Delete)
                 {
                     manager.DeleteDt = DateTime.Now;
                 }
-                if(dialog.Action != CrudActions.None)
+                if (dialog.Action != CrudActions.None)
                 {
                     dbTask = App.EfDataContext
                         .SaveChangesAsync()
-                        .ContinueWith(_ => Dispatcher.Invoke (LoadMangersData));
+                        .ContinueWith(_ => Dispatcher.Invoke(LoadMangersData));
                 }
             }
         }
@@ -252,9 +255,27 @@ namespace ADO_klass_work1
 
         }
 
-        private void ListViewItem_MouseDoubleClick_3(object sender, MouseButtonEventArgs e)
+        private void ListViewItem_MouseDoubleClick_4(object sender, MouseButtonEventArgs e)
         {
+            if (sender is ListViewItem item && item.Content is Sale sale)
+            {
+                EfCrudSalesWindow dialog = new(SaleProudects.FromEntity(sale));
+                dialog.ShowDialog();
 
+                if (dialog.Action == CrudActions.Update)
+                {
+                    sale.ProductId = dialog.Model.ManagerId;
+                    sale.Quantity = dialog.Model.Quantity;
+                    App.EfDataContext.SaveChanges();
+                    LoadProdData();
+                }
+                if (dialog.Action == CrudActions.Delete)
+                {
+                    sale.DeleteDt = DateTime.Now;
+                    App.EfDataContext.SaveChanges();
+                    LoadProdData();
+                }
+            }
         }
     }
 }

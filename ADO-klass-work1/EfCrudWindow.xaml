@@ -103,7 +103,7 @@
                 </ListView.View>
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
-                        <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick_3"/>
+                        <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick_4"/>
                     </Style>
                 </ListView.Resources>
             </ListView>

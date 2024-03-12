@@ -55,5 +55,12 @@ namespace ADO_klass_work1
             new EfCrudWindow().ShowDialog();
             this.Show();
         }
+
+        private void PracticeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new PracticeWindow().ShowDialog();
+            this.Show();
+        }
     }
 }

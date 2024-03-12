@@ -264,7 +264,7 @@ namespace ADO_klass_work1
 
                 if (dialog.Action == CrudActions.Update)
                 {
-                    sale.ProductId = dialog.Model.ManagerId;
+                    sale.ProductId = dialog.Model.ProductId;
                     sale.Quantity = dialog.Model.Quantity;
                     App.EfDataContext.SaveChanges();
                     LoadProdData();

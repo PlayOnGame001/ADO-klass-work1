@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ADO_klass_work1.EfCrudViews"
         mc:Ignorable="d"
         Background="Bisque"
-        Title="EfCrudSalesWindow" Height="235" Width="700">
+        Title="EfCrudSalesWindow" Height="250" Width="700">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="39*"/>

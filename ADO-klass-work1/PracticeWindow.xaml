@@ -22,5 +22,11 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Content="Фактическое время начало продаж"/>
         <Label Grid.Row="0" Grid.Column ="1" x:Name="Questable_label" Content="00:00:00"/>
+        <Label Grid.Row="1" Content="Самое позднее время продажи"/>
+        <Label Grid.Row="1" Grid.Column ="2" x:Name="Questable_label2" Content="00:00:00" />
+        <Label Grid.Row="2" Content="Максимальные продажи"/>
+        <Label Grid.Row="2" Grid.Column ="3" x:Name="Questable_label3" Content="00:00:00" />
+        <Label Grid.Row="3" Content="Среднее продажи"/>
+        <Label Grid.Row="3" Grid.Column ="4" x:Name="Questable_label4" Content="00:00:00" />
     </Grid>
 </Window>

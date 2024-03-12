@@ -28,5 +28,7 @@
         <Label Grid.Row="2" Grid.Column ="3" x:Name="Questable_label3" Content="00:00:00" />
         <Label Grid.Row="3" Content="Среднее продажи"/>
         <Label Grid.Row="3" Grid.Column ="4" x:Name="Questable_label4" Content="00:00:00" />
+        <Label Grid.Row="4" Content="Средняю сумма чека"/>
+        <Label Grid.Row="4" Grid.Column ="5" x:Name="Questable_label5" Content="00:00:00" />
     </Grid>
 </Window>

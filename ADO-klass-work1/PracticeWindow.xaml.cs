@@ -32,21 +32,21 @@ namespace ADO_klass_work1
             ///////1
             Questable_label.Content = "";
             DateTime MinSale = App.EfDataContext.Sales
-                .Where(S => S.SaleDt.Date == data)
-                .Min(S => S.SaleDt);
+                .Where(s => s.SaleDt.Date == data)
+                .Min(s => s.SaleDt);
             Questable_label.Content = MinSale.TimeOfDay.ToString();
 
             ////////2
             Questable_label2.Content = "";
             DateTime MaxSale = App.EfDataContext.Sales
-                .Where(S => S.SaleDt.Date == data)
-                .Max(S => S.SaleDt);
+                .Where(s => s.SaleDt.Date == data)
+                .Max(s => s.SaleDt);
             Questable_label2.Content = MaxSale.TimeOfDay.ToString();
 
             ////////3 (max)
             int MaxProd = App.EfDataContext.Sales
-            .Where(S => S.SaleDt.Date == data)
-            .Max(S => S.Quantity);
+            .Where(s => s.SaleDt.Date == data)
+            .Max(s => s.Quantity);
             Questable_label3.Content = MaxProd;
 
             ///////4(среденее midle)
@@ -57,7 +57,11 @@ namespace ADO_klass_work1
             Questable_label4.Content = MidleProduct;
 
             ///////5(среденее midle)
-            
+            int Check = (int)Math.Round(App.EfDataContext.Sales
+                .Where(s => s.SaleDt.Date == data)
+                .Select(s => s.Quantity * s.Product.Price)
+                .Average());
+            Questable_label5.Content = Check;
         }
     }
 }
